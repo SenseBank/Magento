@@ -1,0 +1,20 @@
+<?php if (!is_null($this->getPostData())):?>
+    <form action="<?= $block->getUrl('sensebank/url/curl'); ?>" method="POST" id="Sensebank_form" style="display: none">
+
+        <?php foreach ($this->getPostData() as $name => $value): ?>
+            <input type="hidden" name="<?php echo $block->escapeHtml($name); ?>"
+                   value="<?php echo $block->escapeHtml($value); ?>"/>
+        <?php endforeach; ?>
+
+        <input type="submit" value="submit"/>
+    </form>
+    <script type="text/javascript">
+        // require(["jquery"], function ($) {
+        //     $(document).ready(function () {
+        //        $('#Sensebank_form').submit();
+        //     });
+        // });
+    </script>
+<?php
+
+endif; ?>
