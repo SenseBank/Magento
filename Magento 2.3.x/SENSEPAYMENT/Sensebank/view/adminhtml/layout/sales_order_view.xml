@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <referenceBlock name="sales_order_tabs">
+            <block class="SENSEPAYMENT\Sensebank\Block\Adminhtml\Sales\Order\View\Tab\Action" name="sensebank_gateway_order_tab_action" template="SENSEPAYMENT_Sensebank::sales/order/view/tab/action.phtml" />
+            <action method="addTab">
+                <argument name="name" xsi:type="string">sensebank_gateway_order_action</argument>
+                <argument name="block" xsi:type="string">sensebank_gateway_order_tab_action</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

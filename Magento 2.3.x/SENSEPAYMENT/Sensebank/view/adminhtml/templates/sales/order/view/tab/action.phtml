@@ -1,0 +1,142 @@
+<?php
+/**
+ * Sensebank Payment View
+ *
+ * @copyright Copyright (c) 2019 Sensebank Bank
+ */
+?>
+
+<?php /** @var $block SENSEPAYMENT\Sensebank\Block\Adminhtml\Sales\Order\View\Tab\Action */ ?>
+<?php $_htmlId = 'Sensebank_id'; ?>
+<?php /** @var $gatewayOrder SENSEPAYMENT\Sensebank\Api\Data\OrderInterface */ ?>
+<?php $gatewayOrder = $block->getGatewayOrder(); ?>
+<?php
+if ($gatewayOrder->getStatusDeposited()) {
+    $amount = $gatewayOrder->getOrderAmountDeposited();
+} else {
+    $amount = $gatewayOrder->getOrderAmount();
+}
+
+if ($gatewayOrder->getStatusRefunded()) {
+    $amount -= $gatewayOrder->getOrderAmountRefunded();
+}
+$gatewayAmount = number_format(round($amount, 2), 2);
+
+//$gatewayAmount = $gatewayOrder->getOrderAmount();
+
+?>
+
+
+
+
+<form id="<?php echo $_htmlId; ?>_form">
+    <div class="admin__page-section-title">
+        <span class="title"><?php /* @escapeNotVerified */ echo __('Sensebank Actions') ?></span>
+    </div>
+    <div class="admin__page-section-item-title">
+        <span class="title">Order # <?php echo $gatewayOrder->getIncrementId();?> [<?php echo $gatewayOrder->getGatewayOrderReference();?>]</span>
+        <?php // echo $gatewayOrder->getIncrementId() . " | " . $gatewayOrder->getStatus();?>
+    </div>
+
+    <div class="admin__fieldset-wrapper-content">
+            <?php if ($gatewayOrder->getId()): ?>
+                <div class="admin__field">
+                    <?php if ($this->getSuccessMessage()): ?>
+                        <div id="messages">
+                            <div class="messages">
+                                <div class="message message-success success">
+                                    <div data-ui-id="messages-message-success"><?php echo $this->getSuccessMessage(); ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <input type="hidden" id="gateway-order-id" name="gateway_order_id" value="<?php echo $gatewayOrder->getId(); ?>">
+                    <input type="hidden" id="gateway-action" name="gateway_action">
+                    <table id="idabi-table" class="admin__table-secondary" class="form-list">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <?php echo __('Get payment status:'); ?>
+                            </td>
+                            <td>
+                                <button type="button" class="action-default scalable primary idabi-button" data-action="payment_status"><?php echo __('Payment Status'); ?></button>
+                            </td>
+                        </tr>
+                        <?php if (!$gatewayOrder->getStatus()): ?>
+                            <?php if ($gatewayOrder->getStatusDeposited() == "2"): ?>
+                                <tr>
+                                    <td>
+                                        <?php echo __('Payment refund:'); ?>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <input type="text" class="admin__control-text" name="gateway_amount" value="<?php echo $gatewayAmount; ?>" id="gatewayAmount">
+
+                                                <button type="button" class="scalable idabi-button" data-action="payment_refund_partial"><?php echo __('Refund amount'); ?></button>
+                                                <button type="button" class="action-default scalable action-save action-secondary idabi-button" data-action="payment_refund_full"><?php echo __('Refund the full amount'); ?></button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <?php echo __('Example: "%1"', $gatewayAmount); ?>, <?php echo __('Max amount: "%1"', $gatewayAmount); ?><br>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php elseif ($gatewayOrder->getStatusDeposited() == "1"): ?>
+                                <tr>
+                                    <td>
+                                        <?php echo __('Payment deposit:'); ?>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div>
+                                                <input type="text" class="form-control" name="gateway_amount" value="<?php echo $gatewayAmount; ?>" id="gatewayAmount">
+                                            </div>
+                                            <div>
+                                                <button type="button" class="scalable idabi-button" data-action="payment_deposit_partial"><?php echo __('Accept amount'); ?></button>
+                                                <button type="button" class="scalable idabi-button" data-action="payment_deposit_full"><?php echo __('Accept the full amount'); ?></button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <?php echo __('Example: "%1"', $gatewayAmount); ?><br>
+                                            <?php echo __('Max amount: "%1"', $gatewayAmount); ?><br>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                            <?php if (!$gatewayOrder->getStatusReversed()): ?>
+                                <tr>
+                                    <td>
+                                        <?php echo __('Payment reverse:'); ?>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="scalable idabi-button" data-action="payment_reverse"><?php echo __('Reverse'); ?></button>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+            <?php endif; ?>
+
+    </div>
+</form>
+
+<script>
+    require([
+        'prototype'
+    ], function (utils) {
+        $$('.idabi-button').each(function (element) {
+            element.observe('click', function (event) {
+                if (this.hasAttribute('data-action')) {
+                    $('gateway-action').setValue(this.readAttribute("data-action"));
+                }
+                submitAndReloadArea($('<?php echo $_htmlId;?>_form').parentNode, '<?php echo $block->getUrl('sensebank/order/actionOrder') ?>');
+            });
+        })
+    });
+</script>

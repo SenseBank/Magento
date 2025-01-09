@@ -1,0 +1,47 @@
+Configure,Настроить
+Pay order №,Оплата заказа №
+"The authorized amount is %1.","Cумма оплаты %1."
+Authorize,Предавторизация
+Payment,Оплата
+"Go to payment form","Перейти к форме оплаты"
+
+"Title displayed to your customer when they make their order","Заголовок, который видит пользователь в процессе оформления заказа"
+"Test mode","Тестовый режим"
+"Two-phase payments","Двухстадийные платежи"
+"Payed order status","Статус оплаченного заказа"
+"Send cart data (including customer info)","Отправлять данные корзины покупателя на шлюз"
+"Tax system","Система налогооблажения"
+"Fiscal document format version","Версия ФФД"
+"Also specify the version in your bank web account and in your fiscal service web account",
+"Payment type","Тип оплаты"
+"Type of goods and services", "Тип оплачиваемой позиции"
+"Allowed Shipping Methods","Доступные методы доставки"
+"Enabled","Включен"
+
+"General","Общая"
+"Simplified, income","Упрощённая, доход"
+"Simplified, income minus expences","Упрощённая, доход минус расход"
+"Unified tax on imputed income","Eдиный налог на вменённый доход"
+"Unified agricultural tax","Eдиный сельскохозяйственный налог"
+"Patent taxation system","Патентная система налогообложения"
+
+"Goods","Товар"
+"Excised goods","Подакцизный товар"
+"Job","Работа"
+"Service","Услуга"
+"Stake in gambling","Ставка азартной игры"
+"Lottery ticket","Лотерейный билет"
+"Intellectual property provision","Предоставление РИД"
+"Payment","Платёж"
+"Agent's commission","Агентское вознаграждение"
+"Combined","Составной предмет расчёта"
+"Other","Иной предмет расчёта"
+
+"Full prepayment","Полная предварительная оплата до момента передачи предмета расчёта"
+"Partial prepayment","Частичная предварительная оплата до момента передачи предмета расчёта"
+"Advance payment","Аванс"
+"Full payment","Полная оплата в момент передачи предмета расчёта"
+"Partial payment with further credit","Частичная оплата предмета расчёта в момент его передачи с последующей оплатой в кредит"
+"No payment with further credit","Передача предмета расчёта без его оплаты в момент его передачи с последующей оплатой в кредит"
+"Payment on credit","Оплата предмета расчёта после его передачи с оплатой в кредит"
+"Delivery","Доставка"
