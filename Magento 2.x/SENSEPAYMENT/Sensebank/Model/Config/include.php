@@ -2,8 +2,8 @@
 
 define('SENSEPAYMENT_PAYMENT_NAME', 'Sense Bank');
 
-define('SENSEPAYMENT_PROD_URL' , 'https://pay.sensebank.com.ua/payment/rest/');
-define('SENSEPAYMENT_TEST_URL' , 'https://sand.sensebank.com.ua/payment/rest/');
+define('SENSEPAYMENT_PROD_URL' , 'https://pay.sensebank.com.ua/ml/v1/payment/');
+define('SENSEPAYMENT_TEST_URL' , 'https://sand.sensebank.com.ua/ml/v1/payment/');
 
 define('SENSEPAYMENT_ENABLE_LOGGING', false);
 define('SENSEPAYMENT_ENABLE_FISCALE_OPTIONS', false);
